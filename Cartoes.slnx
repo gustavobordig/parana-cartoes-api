@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Cartoes.Api/Cartoes.Api.csproj" />
+    <Project Path="src/Cartoes.Application/Cartoes.Application.csproj" />
+    <Project Path="src/Cartoes.Contracts/Cartoes.Contracts.csproj" />
+    <Project Path="src/Cartoes.Domain/Cartoes.Domain.csproj" />
+    <Project Path="src/Cartoes.Infrastructure/Cartoes.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Cartoes.Tests.Unit/Cartoes.Tests.Unit.csproj" />
+  </Folder>
+</Solution>

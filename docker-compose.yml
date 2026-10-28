@@ -1,0 +1,35 @@
+name: parana-cartoes
+
+services:
+  mongodb:
+    image: mongo:8
+    container_name: parana-mongodb
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+    networks: [parana-credito]
+
+  cartoes-api:
+    build: .
+    container_name: parana-cartoes-api
+    environment:
+      Mongo__ConnectionString: mongodb://mongodb:27017
+      Mongo__Database: cartoes_db
+      RabbitMq__Url: amqp://guest:guest@parana-rabbitmq:5672/
+      Cors__Origens__0: http://localhost:5173
+      Cors__Origens__1: http://localhost:5174
+    ports:
+      - "5103:8080"
+    restart: on-failure
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks: [parana-credito]
+
+networks:
+  parana-credito:
+    external: true
